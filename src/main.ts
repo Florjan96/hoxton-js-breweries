@@ -5,7 +5,7 @@ let state = {
     breweries: []
   }
 
-function breweriesForState(){
+function breweriesForEachState(){
 fetch(`https://api.openbrewerydb.org/breweries?by_state=${state.USState}`)
 .then(resp=>resp.json())
 .then(breweries=>{
@@ -18,12 +18,20 @@ fetch(`https://api.openbrewerydb.org/breweries?by_state=${state.USState}`)
 
 function writeState(){
   let formEl=document.querySelector('#select-state-form')
-  formEl?.addEventListener('submit',function(event){
+  formEl.addEventListener('submit',function(event){
     event.preventDefault()
-    console.log('sdd')
+   let USState=formEl['select-state'].value
+   state.USState=USState
+   breweriesForEachState()
   })
 }
+// window.state=state
 writeState()
+
+
+// function renderBreweryList(){
+
+// }
 
 
 
@@ -153,4 +161,7 @@ function render(){
   main.textContent=''
 
   header()
+  brewery()
 }
+// ??????????
+render()
