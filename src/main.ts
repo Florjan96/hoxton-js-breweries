@@ -1,13 +1,29 @@
-const baseUrl = 'https://api.openbrewerydb.org/breweries'
-// const selectStateForm = document.querySelector("#select-state-form")
+// import './style.css';
 
 let state = {
    USState: '',
     breweries: []
   }
 
+function breweriesForState(){
+fetch(`https://api.openbrewerydb.org/breweries?by_state=${state.USState}`)
+.then(resp=>resp.json())
+.then(breweries=>{
+  state.breweries=breweries
+} 
+  )
+
+}
 
 
+function writeState(){
+  let formEl=document.querySelector('#select-state-form')
+  formEl?.addEventListener('submit',function(event){
+    event.preventDefault()
+    console.log('sdd')
+  })
+}
+writeState()
 
 
 
@@ -15,26 +31,6 @@ let state = {
   
   function brewery(){
 
-    //   <ul class="breweries-list">
-    //   <li>
-    //     <h2>Snow Belt Brew</h2>
-    //     <div class="type">micro</div>
-    //     <section class="address">
-    //       <h3>Address:</h3>
-    //       <p>9511 Kile Rd</p>
-    //       <p><strong>Chardon, 44024</strong></p>
-    //     </section>
-    //     <section class="phone">
-    //       <h3>Phone:</h3>
-    //       <p>N/A</p>
-    //     </section>
-    //     <section class="link">
-    //       <a href="null" target="_blank">Visit Website</a>
-    //     </section>
-    //   </li>
-    //   // More list elements
-    // </ul>
-  
   let articleMain=document.querySelector('article')
   
   let breweryUl=document.createElement('ul')
@@ -67,9 +63,7 @@ h3.textContent='Address:'
   let pRoad=document.createElement('p')
 pRoad.textContent='Chardon,44024'
 
-    //       <h3>Phone:</h3>
-    //       <p>N/A</p>
-    //     </section>
+
   let sectionPhone=document.createElement('section')
 sectionPhone.className="phone"
 
@@ -80,8 +74,6 @@ phone.textContent="Phone:"
 phoneNr.textContent='N/A'
 
 
-    //       <a href="null" target="_blank">Visit Website</a>
-    //     </section>
   let sectionLink=document.createElement('section')
 sectionLink.className='link'
 
@@ -155,3 +147,10 @@ main.append(header,h1)
   header()
 
 
+function render(){
+  let main=document.querySelector('main')
+  if (main===null)return
+  main.textContent=''
+
+  header()
+}
