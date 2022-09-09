@@ -10,7 +10,11 @@ fetch(`https://api.openbrewerydb.org/breweries?by_state=${state.USState}`)
 .then(resp=>resp.json())
 .then(breweries=>{
   state.breweries=breweries
+ 
+
 } 
+
+
   )
 
 }
@@ -37,21 +41,44 @@ writeState()
 
 
   
-  function brewery(){
+  function renderBrewery(){
+let brewery1=
+    {
+      address_2: null,
+      address_3: null,
+      brewery_type: 'large',
+      city: 'San Diego',
+      country: 'United States',
+      county_province: null,
+      created_at: '2018-07-24T00:00:00.000Z',
+      id: 8041,
+      latitude: '32.714813',
+      longitude: '-117.129593',
+      name: '10 Barrel Brewing Co',
+      obdb_id: '10-barrel-brewing-co-san-diego',
+      phone: '6195782311',
+      postal_code: '92101-6618',
+      state: 'California',
+      street: '1501 E St',
+      updated_at: '2018-08-23T00:00:00.000Z',
+      website_url: 'http://10barrel.com'
+    }
 
-  let articleMain=document.querySelector('article')
-  
+
+
+  let articleMain=document.createElement('article')
+  // articleMain.className='article-brewery'
   let breweryUl=document.createElement('ul')
 breweryUl.className="breweries-list"
 
   let li=document.createElement('li')
 
   let h2=document.createElement('h2')
-h2.textContent='Snow Belt Brew'
+h2.textContent=brewery1.name
 
   let div=document.createElement('div')
 div.className="type"
-div.textContent='micro'
+div.textContent=brewery1.brewery_type
 
 
      
@@ -66,7 +93,7 @@ h3.textContent='Address:'
 
 
   let pAdress=document.createElement('p')
-  pAdress.textContent='9511 Kile Rd'
+  pAdress.textContent=brewery1.street
   
   let pRoad=document.createElement('p')
 pRoad.textContent='Chardon,44024'
@@ -79,14 +106,14 @@ sectionPhone.className="phone"
 phone.textContent="Phone:"
 
   let phoneNr=document.createElement('p')
-phoneNr.textContent='N/A'
+phoneNr.textContent=brewery1.phone
 
 
   let sectionLink=document.createElement('section')
 sectionLink.className='link'
 
   let a=document.createElement('a')
-  a.href='null'
+  a.href=brewery1.website_url
   a.target="_blank"
   a.textContent="Visit Website"
   
@@ -98,15 +125,20 @@ sectionLink.className='link'
     li.append(h2,div,sectionAdress,sectionPhone,sectionLink)
     breweryUl.append(li)
     articleMain.append(breweryUl)
+    
   
-    // let main=document.querySelector('main')
+    let main=document.querySelector('main')
   
-    // main?.append(articleMain)
+    main.append(articleMain)
     
   
     
     }
-    brewery()
+    renderBrewery()
+    renderBrewery()
+    renderBrewery()
+    renderBrewery()
+    renderBrewery()
 
   function header(){
 
@@ -119,6 +151,7 @@ sectionLink.className='link'
 // </header>
 
 let main=document.querySelector('main')
+if (main===null)return
 
 let h1=document.createElement('h1')
 h1.textContent="List of Breweries"
@@ -161,7 +194,13 @@ function render(){
   main.textContent=''
 
   header()
-  brewery()
+  renderBrewery()
+  renderBrewery()
+  renderBrewery()
+  renderBrewery()
+  renderBrewery()
+
 }
 // ??????????
 render()
+
